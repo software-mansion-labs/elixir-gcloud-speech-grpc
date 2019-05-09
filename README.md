@@ -16,12 +16,12 @@ end
 
 ## Sponsors
 
-This project is sponsored by [Abridge AI, Inc.](https://abridge.ai)
+This project is sponsored by [Abridge AI, Inc.](https://abridge.com)
 
 ## Copyright and License
 
-Copyright 2019, [Software Mansion](https://swmansion.com)
+Copyright 2019, [Software Mansion](https://swmansion.com/?utm_source=git&utm_medium=readme&utm_campaign=elixir-gcp-speech)
 
-[![Software Mansion](https://membraneframework.github.io/static/logo/swm_logo_readme.png)](https://swmansion.com)
+[![Software Mansion](https://membraneframework.github.io/static/logo/swm_logo_readme.png)](https://swmansion.com/?utm_source=git&utm_medium=readme&utm_campaign=elixir-gcp-speech)
 
 Licensed under the [Apache License, Version 2.0](LICENSE)
