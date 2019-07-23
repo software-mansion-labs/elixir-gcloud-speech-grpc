@@ -26,8 +26,10 @@ defmodule GCloud.SpeechAPI.Streaming.ClientTest do
 
     str_cfg_req = StreamingRecognizeRequest.new(streaming_request: {:streaming_config, str_cfg})
 
+    fixture_path = "../../fixtures/sample.flac" |> Path.expand(__DIR__)
+
     <<part_a::binary-size(48277), part_b::binary-size(44177), part_c::binary>> =
-      File.read!("sample.flac")
+      File.read!(fixture_path)
 
     content_reqs =
       [part_a, part_b, part_c]

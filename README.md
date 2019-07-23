@@ -53,7 +53,7 @@ str_cfg_req =
   )
 
 <<part_a::binary-size(48277), part_b::binary-size(44177),
-  part_c::binary>> = File.read!("sample.flac")
+  part_c::binary>> = File.read!("test/fixtures/sample.flac")
 
 content_reqs =
   [part_a, part_b, part_c] |> Enum.map(fn data ->
@@ -97,6 +97,11 @@ Since the auto-generated modules have poor typing and no docs, the mapping may n
 * Structs defined in these modules should be created with `new/1` function accepting keyword list with values for fields
 * when message field is an union field, it should be set to a tuple with atom indicating content of this field and an actual value, e.g. for `StreamingRecognizeRequest` the field `streaming_request` can be set to either `{:streaming_config, config}` or `{:audio_content, "binary_with_audio_data"}`
 * Fields of enum types can be set to an integer or an atom matching the enum, e.g. value of field `:audio_encoding` in `RecognitionConfig` can be set to `:FLAC` or `2`
+
+## Fixture
+
+A recording fragment in `test/fixtures` comes from an audiobook
+"The adventures of Sherlock Holmes (version 2)" available on [LibriVox](https://librivox.org/the-adventures-of-sherlock-holmes-by-sir-arthur-conan-doyle/)
 
 ## Status
 
