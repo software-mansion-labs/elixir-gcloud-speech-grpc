@@ -1,5 +1,5 @@
 defmodule Google.Protobuf.Duration do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/protobuf/duration.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{

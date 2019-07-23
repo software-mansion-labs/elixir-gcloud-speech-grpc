@@ -1,5 +1,5 @@
 defmodule Google.Rpc.Status do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/rpc/status.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{

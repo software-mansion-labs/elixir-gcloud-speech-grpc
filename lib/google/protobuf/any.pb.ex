@@ -1,5 +1,5 @@
 defmodule Google.Protobuf.Any do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/protobuf/any.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{

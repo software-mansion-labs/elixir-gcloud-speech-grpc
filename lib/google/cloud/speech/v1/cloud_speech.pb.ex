@@ -1,5 +1,5 @@
 defmodule Google.Cloud.Speech.V1.RecognizeRequest do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -13,7 +13,7 @@ defmodule Google.Cloud.Speech.V1.RecognizeRequest do
 end
 
 defmodule Google.Cloud.Speech.V1.LongRunningRecognizeRequest do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -27,7 +27,7 @@ defmodule Google.Cloud.Speech.V1.LongRunningRecognizeRequest do
 end
 
 defmodule Google.Cloud.Speech.V1.StreamingRecognizeRequest do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -41,7 +41,7 @@ defmodule Google.Cloud.Speech.V1.StreamingRecognizeRequest do
 end
 
 defmodule Google.Cloud.Speech.V1.StreamingRecognitionConfig do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -57,7 +57,7 @@ defmodule Google.Cloud.Speech.V1.StreamingRecognitionConfig do
 end
 
 defmodule Google.Cloud.Speech.V1.RecognitionConfig do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -107,7 +107,7 @@ defmodule Google.Cloud.Speech.V1.RecognitionConfig do
 end
 
 defmodule Google.Cloud.Speech.V1.RecognitionConfig.AudioEncoding do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, enum: true, syntax: :proto3
 
   field :ENCODING_UNSPECIFIED, 0
@@ -121,7 +121,7 @@ defmodule Google.Cloud.Speech.V1.RecognitionConfig.AudioEncoding do
 end
 
 defmodule Google.Cloud.Speech.V1.RecognitionMetadata do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -169,7 +169,7 @@ defmodule Google.Cloud.Speech.V1.RecognitionMetadata do
 end
 
 defmodule Google.Cloud.Speech.V1.RecognitionMetadata.InteractionType do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, enum: true, syntax: :proto3
 
   field :INTERACTION_TYPE_UNSPECIFIED, 0
@@ -184,7 +184,7 @@ defmodule Google.Cloud.Speech.V1.RecognitionMetadata.InteractionType do
 end
 
 defmodule Google.Cloud.Speech.V1.RecognitionMetadata.MicrophoneDistance do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, enum: true, syntax: :proto3
 
   field :MICROPHONE_DISTANCE_UNSPECIFIED, 0
@@ -194,7 +194,7 @@ defmodule Google.Cloud.Speech.V1.RecognitionMetadata.MicrophoneDistance do
 end
 
 defmodule Google.Cloud.Speech.V1.RecognitionMetadata.OriginalMediaType do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, enum: true, syntax: :proto3
 
   field :ORIGINAL_MEDIA_TYPE_UNSPECIFIED, 0
@@ -203,7 +203,7 @@ defmodule Google.Cloud.Speech.V1.RecognitionMetadata.OriginalMediaType do
 end
 
 defmodule Google.Cloud.Speech.V1.RecognitionMetadata.RecordingDeviceType do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, enum: true, syntax: :proto3
 
   field :RECORDING_DEVICE_TYPE_UNSPECIFIED, 0
@@ -216,7 +216,7 @@ defmodule Google.Cloud.Speech.V1.RecognitionMetadata.RecordingDeviceType do
 end
 
 defmodule Google.Cloud.Speech.V1.SpeechContext do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -228,7 +228,7 @@ defmodule Google.Cloud.Speech.V1.SpeechContext do
 end
 
 defmodule Google.Cloud.Speech.V1.RecognitionAudio do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -242,7 +242,7 @@ defmodule Google.Cloud.Speech.V1.RecognitionAudio do
 end
 
 defmodule Google.Cloud.Speech.V1.RecognizeResponse do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -254,7 +254,7 @@ defmodule Google.Cloud.Speech.V1.RecognizeResponse do
 end
 
 defmodule Google.Cloud.Speech.V1.LongRunningRecognizeResponse do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -266,7 +266,7 @@ defmodule Google.Cloud.Speech.V1.LongRunningRecognizeResponse do
 end
 
 defmodule Google.Cloud.Speech.V1.LongRunningRecognizeMetadata do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -282,7 +282,7 @@ defmodule Google.Cloud.Speech.V1.LongRunningRecognizeMetadata do
 end
 
 defmodule Google.Cloud.Speech.V1.StreamingRecognizeResponse do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -301,7 +301,7 @@ defmodule Google.Cloud.Speech.V1.StreamingRecognizeResponse do
 end
 
 defmodule Google.Cloud.Speech.V1.StreamingRecognizeResponse.SpeechEventType do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, enum: true, syntax: :proto3
 
   field :SPEECH_EVENT_UNSPECIFIED, 0
@@ -309,7 +309,7 @@ defmodule Google.Cloud.Speech.V1.StreamingRecognizeResponse.SpeechEventType do
 end
 
 defmodule Google.Cloud.Speech.V1.StreamingRecognitionResult do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -334,7 +334,7 @@ defmodule Google.Cloud.Speech.V1.StreamingRecognitionResult do
 end
 
 defmodule Google.Cloud.Speech.V1.SpeechRecognitionResult do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -351,7 +351,7 @@ defmodule Google.Cloud.Speech.V1.SpeechRecognitionResult do
 end
 
 defmodule Google.Cloud.Speech.V1.SpeechRecognitionAlternative do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -367,7 +367,7 @@ defmodule Google.Cloud.Speech.V1.SpeechRecognitionAlternative do
 end
 
 defmodule Google.Cloud.Speech.V1.WordInfo do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -383,7 +383,7 @@ defmodule Google.Cloud.Speech.V1.WordInfo do
 end
 
 defmodule Google.Cloud.Speech.V1.Speech.Service do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use GRPC.Service, name: "google.cloud.speech.v1.Speech"
 
   rpc :Recognize,
@@ -400,6 +400,6 @@ defmodule Google.Cloud.Speech.V1.Speech.Service do
 end
 
 defmodule Google.Cloud.Speech.V1.Speech.Stub do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use GRPC.Stub, service: Google.Cloud.Speech.V1.Speech.Service
 end

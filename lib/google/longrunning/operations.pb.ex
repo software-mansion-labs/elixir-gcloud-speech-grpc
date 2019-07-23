@@ -1,5 +1,5 @@
 defmodule Google.Longrunning.Operation do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/longrunning/operations.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -19,7 +19,7 @@ defmodule Google.Longrunning.Operation do
 end
 
 defmodule Google.Longrunning.GetOperationRequest do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/longrunning/operations.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -31,7 +31,7 @@ defmodule Google.Longrunning.GetOperationRequest do
 end
 
 defmodule Google.Longrunning.ListOperationsRequest do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/longrunning/operations.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -49,7 +49,7 @@ defmodule Google.Longrunning.ListOperationsRequest do
 end
 
 defmodule Google.Longrunning.ListOperationsResponse do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/longrunning/operations.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -63,7 +63,7 @@ defmodule Google.Longrunning.ListOperationsResponse do
 end
 
 defmodule Google.Longrunning.CancelOperationRequest do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/longrunning/operations.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -75,7 +75,7 @@ defmodule Google.Longrunning.CancelOperationRequest do
 end
 
 defmodule Google.Longrunning.DeleteOperationRequest do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/longrunning/operations.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -87,7 +87,7 @@ defmodule Google.Longrunning.DeleteOperationRequest do
 end
 
 defmodule Google.Longrunning.WaitOperationRequest do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/longrunning/operations.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -101,7 +101,7 @@ defmodule Google.Longrunning.WaitOperationRequest do
 end
 
 defmodule Google.Longrunning.OperationInfo do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/longrunning/operations.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -115,7 +115,7 @@ defmodule Google.Longrunning.OperationInfo do
 end
 
 defmodule Google.Longrunning.Operations.Service do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/longrunning/operations.proto`"
   use GRPC.Service, name: "google.longrunning.Operations"
 
   rpc :ListOperations,
@@ -129,6 +129,6 @@ defmodule Google.Longrunning.Operations.Service do
 end
 
 defmodule Google.Longrunning.Operations.Stub do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/longrunning/operations.proto`"
   use GRPC.Stub, service: Google.Longrunning.Operations.Service
 end

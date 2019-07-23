@@ -1,5 +1,5 @@
 defmodule Google.Protobuf.Struct do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/protobuf/struct.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -11,7 +11,7 @@ defmodule Google.Protobuf.Struct do
 end
 
 defmodule Google.Protobuf.Struct.FieldsEntry do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/protobuf/struct.proto`"
   use Protobuf, map: true, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -25,7 +25,7 @@ defmodule Google.Protobuf.Struct.FieldsEntry do
 end
 
 defmodule Google.Protobuf.Value do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/protobuf/struct.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -43,7 +43,7 @@ defmodule Google.Protobuf.Value do
 end
 
 defmodule Google.Protobuf.ListValue do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/protobuf/struct.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -55,7 +55,7 @@ defmodule Google.Protobuf.ListValue do
 end
 
 defmodule Google.Protobuf.NullValue do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/protobuf/struct.proto`"
   use Protobuf, enum: true, syntax: :proto3
 
   field :NULL_VALUE, 0

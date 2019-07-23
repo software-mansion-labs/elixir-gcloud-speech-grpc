@@ -1,5 +1,5 @@
 defmodule Google.Protobuf.DoubleValue do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/protobuf/wrappers.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -11,7 +11,7 @@ defmodule Google.Protobuf.DoubleValue do
 end
 
 defmodule Google.Protobuf.FloatValue do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/protobuf/wrappers.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -23,7 +23,7 @@ defmodule Google.Protobuf.FloatValue do
 end
 
 defmodule Google.Protobuf.Int64Value do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/protobuf/wrappers.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -35,7 +35,7 @@ defmodule Google.Protobuf.Int64Value do
 end
 
 defmodule Google.Protobuf.UInt64Value do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/protobuf/wrappers.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -47,7 +47,7 @@ defmodule Google.Protobuf.UInt64Value do
 end
 
 defmodule Google.Protobuf.Int32Value do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/protobuf/wrappers.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -59,7 +59,7 @@ defmodule Google.Protobuf.Int32Value do
 end
 
 defmodule Google.Protobuf.UInt32Value do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/protobuf/wrappers.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -71,7 +71,7 @@ defmodule Google.Protobuf.UInt32Value do
 end
 
 defmodule Google.Protobuf.BoolValue do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/protobuf/wrappers.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -83,7 +83,7 @@ defmodule Google.Protobuf.BoolValue do
 end
 
 defmodule Google.Protobuf.StringValue do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/protobuf/wrappers.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
@@ -95,7 +95,7 @@ defmodule Google.Protobuf.StringValue do
 end
 
 defmodule Google.Protobuf.BytesValue do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/protobuf/wrappers.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{

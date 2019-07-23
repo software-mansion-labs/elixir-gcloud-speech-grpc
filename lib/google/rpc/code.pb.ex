@@ -1,5 +1,5 @@
 defmodule Google.Rpc.Code do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/rpc/code.proto`"
   use Protobuf, enum: true, syntax: :proto3
 
   field :OK, 0

@@ -1,5 +1,5 @@
 defmodule Google.Protobuf.Timestamp do
-  @moduledoc false
+  @moduledoc "Auto-generated from `googleapis/google/protobuf/timestamp.proto`"
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{

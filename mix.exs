@@ -54,8 +54,20 @@ defmodule GCloudSpeechToText.MixProject do
       main: "readme",
       extras: ["README.md"],
       source_ref: "v#{@version}",
+      groups_for_modules: [
+        "Auto-generated": [
+          ~r/Google\.Cloud\.Speech.V1\..*/,
+          ~r/Google\.Longrunning..*/,
+          ~r/Google\.Protobuf\..*/,
+          ~r/Google\.Rpc\..*/
+        ]
+      ],
       nest_modules_by_prefix: [
-        GCloudSpeechToText.API
+        GCloudSpeechToText.API,
+        Google.Cloud.Speech.V1,
+        Google.Longrunning,
+        Google.Protobuf,
+        Google.Rpc
       ]
     ]
   end
