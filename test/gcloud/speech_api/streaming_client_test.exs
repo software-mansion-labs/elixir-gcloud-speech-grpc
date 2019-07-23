@@ -12,6 +12,7 @@ defmodule GCloud.SpeechAPI.Streaming.ClientTest do
 
   @module GCloud.SpeechAPI.Streaming.Client
 
+  @tag :external
   test "regcognize" do
     cfg =
       RecognitionConfig.new(

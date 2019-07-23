@@ -18,6 +18,9 @@ end
 
 This library uses [`Goth`](https://github.com/peburrows/goth) to obtain authentication tokens. It requires Google Cloud credendials to be configured. See [Goth's README](https://github.com/peburrows/goth#installation) for details.
 
+Tests with tag `:external` communicate with Google APIs and require such config, thus are
+excluded by default, use `mix test --include external` to run them.
+
 ## Usage example
 
 ```elixir
