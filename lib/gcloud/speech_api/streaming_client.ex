@@ -26,70 +26,7 @@ defmodule GCloud.SpeechAPI.Streaming.Client do
   1. Send final `Google.Cloud.Speech.V1.RecognitionAudio` with option `end_stream: true`
   1. Stop the client after receiving all results
 
-  ## Example
-
-  ```elixir
-  alias Google.Cloud.Speech.V1.{
-    RecognitionConfig,
-    StreamingRecognitionConfig,
-    StreamingRecognizeRequest,
-    StreamingRecognizeResponse
-  }
-
-  cfg =
-    RecognitionConfig.new(
-      audio_channel_count: 1,
-      encoding: :FLAC,
-      language_code: "en-GB",
-      sample_rate_hertz: 16000
-    )
-
-  str_cfg =
-    StreamingRecognitionConfig.new(
-      config: cfg,
-      interim_results: false
-    )
-
-  str_cfg_req =
-    StreamingRecognizeRequest.new(
-      streaming_request: {:streaming_config, str_cfg}
-    )
-
-  <<part_a::binary-size(48277), part_b::binary-size(44177),
-    part_c::binary>> = File.read!("sample.flac")
-
-  content_reqs =
-    [part_a, part_b, part_c]
-    |> Enum.map(fn data ->
-      StreamingRecognizeRequest.new(
-        streaming_request: {:audio_content, data}
-      )
-    end)
-
-  {:ok, client} = #{inspect(__MODULE__)}.start_link()
-  client |> #{inspect(__MODULE__)}.send_request(str_cfg_req)
-
-  content_reqs
-  |> Enum.each(fn stream_audio_req ->
-    #{inspect(__MODULE__)}.send_request(
-      client,
-      stream_audio_req
-    )
-  end)
-
-  #{inspect(__MODULE__)}.send_request(
-    client,
-    StreamingRecognizeRequest.new(
-      streaming_request: {:audio_content, ""}
-    ),
-    end_stream: true
-  )
-
-  receive do
-    %StreamingRecognizeResponse{results: results} ->
-      IO.inspect(results)
-  end
-  ```
+  See [README](readme.html) for code example
   """
 
   @timeout 50

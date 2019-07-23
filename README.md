@@ -1,16 +1,85 @@
-# [WIP] Google Cloud Speech-to-Text API client
+# Google Cloud Speech gRPC API client
 
 Elixir client for Google Cloud Speech-to-Text API using gRPC
 
 ## Installation
 
-When published, the package can be installed by adding `:gcloud_speech_to_text` to your list of dependencies in `mix.exs`:
+The package can be installed by adding `:gcloud_speech_grpc` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:gcloud_speech_to_text, "~> 0.1.0"}
+    {:gcloud_speech_grpc, "~> 0.1.0"}
   ]
+end
+```
+
+## Configuration
+
+This library uses [`Goth`](https://github.com/peburrows/goth) to obtain authentication tokens. It requires Google Cloud credendials to be configured. See [Goth's README](https://github.com/peburrows/goth#installation) for details.
+
+## Usage example
+
+```elixir
+alias Google.Cloud.Speech.V1.{
+  RecognitionConfig,
+  StreamingRecognitionConfig,
+  StreamingRecognizeRequest,
+  StreamingRecognizeResponse
+}
+
+alias GCloud.SpeechAPI.Streaming.Client
+
+cfg =
+  RecognitionConfig.new(
+    audio_channel_count: 1,
+    encoding: :FLAC,
+    language_code: "en-GB",
+    sample_rate_hertz: 16000
+  )
+
+str_cfg =
+  StreamingRecognitionConfig.new(
+    config: cfg,
+    interim_results: false
+  )
+
+str_cfg_req =
+  StreamingRecognizeRequest.new(
+    streaming_request: {:streaming_config, str_cfg}
+  )
+
+<<part_a::binary-size(48277), part_b::binary-size(44177),
+  part_c::binary>> = File.read!("sample.flac")
+
+content_reqs =
+  [part_a, part_b, part_c] |> Enum.map(fn data ->
+    StreamingRecognizeRequest.new(
+      streaming_request: {:audio_content, data}
+    )
+  end)
+
+{:ok, client} = Client.start_link()
+client |> Client.send_request(str_cfg_req)
+
+content_reqs |> Enum.each(fn stream_audio_req ->
+  Client.send_request(
+    client,
+    stream_audio_req
+  )
+end)
+
+Client.send_request(
+  client,
+  StreamingRecognizeRequest.new(
+    streaming_request: {:audio_content, ""}
+  ),
+  end_stream: true
+)
+
+receive do
+  %StreamingRecognizeResponse{results: results} ->
+    IO.inspect(results)
 end
 ```
 
@@ -25,6 +94,10 @@ Since the auto-generated modules have poor typing and no docs, the mapping may n
 * Structs defined in these modules should be created with `new/1` function accepting keyword list with values for fields
 * when message field is an union field, it should be set to a tuple with atom indicating content of this field and an actual value, e.g. for `StreamingRecognizeRequest` the field `streaming_request` can be set to either `{:streaming_config, config}` or `{:audio_content, "binary_with_audio_data"}`
 * Fields of enum types can be set to an integer or an atom matching the enum, e.g. value of field `:audio_encoding` in `RecognitionConfig` can be set to `:FLAC` or `2`
+
+## Status
+
+Current version of library supports only Streaming API, regular and LongRunning are not implemented
 
 ## Sponsors
 

@@ -2,11 +2,11 @@ defmodule GCloud.SpeechAPI.MixProject do
   use Mix.Project
 
   @version "0.1.0"
-  @github_url "https://github.com/SoftwareMansion/elixir-gcloud-speech-to-text"
+  @github_url "https://github.com/SoftwareMansion/elixir-gcloud-speech-grpc"
 
   def project do
     [
-      app: :gcloud_speech_to_text,
+      app: :gcloud_speech_grpc,
       version: @version,
       elixir: "~> 1.8",
       start_permanent: Mix.env() == :prod,
@@ -17,7 +17,7 @@ defmodule GCloud.SpeechAPI.MixProject do
       package: package(),
 
       # docs
-      name: "Google Cloud Speech-to-Text API",
+      name: "Google Cloud Speech gRPC API",
       source_url: @github_url,
       docs: docs()
     ]
