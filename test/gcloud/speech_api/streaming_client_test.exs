@@ -1,4 +1,4 @@
-defmodule GCloudSpeechToText.API.StreamingClientTest do
+defmodule GCloud.SpeechAPI.Streaming.ClientTest do
   use ExUnit.Case, async: true
 
   alias Google.Cloud.Speech.V1.{
@@ -10,7 +10,7 @@ defmodule GCloudSpeechToText.API.StreamingClientTest do
     StreamingRecognizeResponse
   }
 
-  @module GCloudSpeechToText.API.StreamingClient
+  @module GCloud.SpeechAPI.Streaming.Client
 
   test "regcognize" do
     cfg =

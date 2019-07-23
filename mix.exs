@@ -1,4 +1,4 @@
-defmodule GCloudSpeechToText.MixProject do
+defmodule GCloud.SpeechAPI.MixProject do
   use Mix.Project
 
   @version "0.1.0"
@@ -17,7 +17,7 @@ defmodule GCloudSpeechToText.MixProject do
       package: package(),
 
       # docs
-      name: "Google Cloud Speech to Text",
+      name: "Google Cloud Speech-to-Text API",
       source_url: @github_url,
       docs: docs()
     ]
@@ -63,7 +63,7 @@ defmodule GCloudSpeechToText.MixProject do
         ]
       ],
       nest_modules_by_prefix: [
-        GCloudSpeechToText.API,
+        GCloud.SpeechAPI,
         Google.Cloud.Speech.V1,
         Google.Longrunning,
         Google.Protobuf,

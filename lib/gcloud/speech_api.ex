@@ -1,4 +1,4 @@
-defmodule GCloudSpeechToText.API do
+defmodule GCloud.SpeechAPI do
   @api_url "speech.googleapis.com"
   @api_port 443
   @token_scope "https://www.googleapis.com/auth/cloud-platform"
