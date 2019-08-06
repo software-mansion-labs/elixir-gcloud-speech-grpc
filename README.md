@@ -14,10 +14,6 @@ def deps do
 end
 ```
 
-## Sponsors
-
-This project is sponsored by [Abridge AI, Inc.](https://abridge.ai)
-
 ## Copyright and License
 
 Copyright 2019, [Software Mansion](https://swmansion.com)
