@@ -1,7 +1,7 @@
 defmodule GCloud.SpeechAPI.Streaming.Client do
-  alias GCloud.SpeechAPI
-  alias Google.Cloud.Speech.V1.Speech.Stub, as: SpeechStub
-  alias Google.Cloud.Speech.V1.StreamingRecognizeRequest
+  use GenServer
+  alias __MODULE__.Connection
+  alias Google.Cloud.Speech.V1.{StreamingRecognizeRequest, StreamingRecognizeResponse}
 
   @moduledoc """
   A client process for Streaming API.
@@ -29,16 +29,16 @@ defmodule GCloud.SpeechAPI.Streaming.Client do
   See [README](readme.html) for code example
   """
 
-  @timeout 50
-
   @doc """
   Starts a linked client process.
 
-  `target` is a pid of a process that will receive recognition results
+  Possible options are:
+  - `target` - A pid of a process that will receive recognition results. Defaults to `self()`.
+  - `start_time` - Time by which response times will be shifted. Defaults to `0`.
   """
-  @spec start_link(target :: pid()) :: {:ok, pid} | {:error, any()}
-  def start_link(target \\ self()) do
-    do_start(:spawn_link, target)
+  @spec start_link(options :: Keyword.t()) :: {:ok, pid} | {:error, any()}
+  def start_link(options \\ []) do
+    do_start(:start_link, options)
   end
 
   @doc """
@@ -47,25 +47,20 @@ defmodule GCloud.SpeechAPI.Streaming.Client do
   See `start_link/1` for more info
   """
   @spec start(target :: pid()) :: {:ok, pid} | {:error, any()}
-  def start(target \\ self()) do
-    do_start(:spawn, target)
+  def start(options \\ []) do
+    do_start(:start, options)
   end
 
-  defp do_start(fun, target) do
-    with {:ok, channel} <- SpeechAPI.connect() do
-      pid = apply(Kernel, fun, [__MODULE__, :init, [channel, target]])
-      {:ok, pid}
-    end
+  defp do_start(fun, options) do
+    options = %{target: self(), start_time: 0} |> Map.merge(options |> Map.new())
+    apply(GenServer, fun, [__MODULE__, options])
   end
 
   @doc """
   Stops a client process.
   """
   @spec stop(client :: pid()) :: :ok
-  def stop(pid) do
-    send(pid, {__MODULE__, :stop})
-    :ok
-  end
+  defdelegate stop(pid), to: GenServer
 
   @doc """
   Sends a request to the API. If option `end_stream: true` is passed,
@@ -73,58 +68,41 @@ defmodule GCloud.SpeechAPI.Streaming.Client do
   """
   @spec send_request(client :: pid(), StreamingRecognizeRequest.t(), Keyword.t()) :: :ok
   def send_request(pid, request, opts \\ []) do
-    send(pid, {__MODULE__, :send_request, request, opts})
+    GenServer.cast(pid, {:send_request, request, opts})
     :ok
   end
 
-  @doc false
-  # entry point of client process
-  def init(channel, target) do
-    request_opts = SpeechAPI.request_opts()
-    stream = SpeechStub.streaming_recognize(channel, request_opts)
-    loop(%{channel: channel, stream: stream, target: target, recv_enum: nil})
+  @impl true
+  def init(opts) do
+    {:ok, conn} = Connection.start_link()
+    {:ok, opts |> Map.merge(%{conn: conn})}
   end
 
-  defp loop(state) do
-    state
-    |> grpc_receive()
-    |> receive_others()
-    |> loop()
+  @impl true
+  def handle_cast({:send_request, request, opts}, state) do
+    :ok = state.conn |> Connection.send_request(request, opts)
+    {:noreply, state}
   end
 
-  defp grpc_receive(%{stream: stream, recv_enum: nil} = state) do
-    # recv reads process mailbox (messages from :gun library)
-    res = GRPC.Stub.recv(stream, timeout: @timeout)
+  @impl true
+  def handle_info(%StreamingRecognizeResponse{} = response, state) do
+    %{start_time: start_time} = state
 
-    case res do
-      {:ok, enum} -> grpc_receive(%{state | recv_enum: enum})
-      {:error, %GRPC.RPCError{status: 4}} -> state
-      {:error, error} -> exit(error)
-    end
+    response =
+      response
+      |> Map.update!(:results, &Enum.map(&1, fn res -> update_result_time(res, start_time) end))
+
+    send(state.target, response)
+    {:noreply, state}
   end
 
-  defp grpc_receive(%{target: target, recv_enum: enum} = state) do
-    enum
-    |> Enum.each(fn
-      {:ok, message} -> send(target, message)
-      {:error, %GRPC.RPCError{status: 4}} -> nil
-      {:error, error} -> exit(error)
-    end)
-
-    state
+  @impl true
+  def terminate(_reason, state) do
+    state.conn |> Connection.stop()
   end
 
-  defp receive_others(%{channel: channel, stream: stream} = state) do
-    receive do
-      {__MODULE__, :send_request, request, opts} ->
-        stream |> GRPC.Stub.send_request(request, opts)
-        state
-
-      {__MODULE__, :stop} ->
-        SpeechAPI.disconnect(channel)
-        exit(:normal)
-    after
-      @timeout -> state
-    end
+  defp update_result_time(result, start_time) do
+    result
+    |> Map.update!(:result_end_time, &(start_time + &1.nanos + &1.seconds * 1_000_000_000))
   end
 end
