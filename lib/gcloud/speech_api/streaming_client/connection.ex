@@ -1,8 +1,15 @@
 defmodule GCloud.SpeechAPI.Streaming.Client.Connection do
   @moduledoc false
+  # This module wraps a crappy API of gRPC library that has a call reading
+  # the process mailbox - `GRPC.Stub.recv/2`.
+  # Using GenServer would break the calls to this function as `handle_info` callback
+  # would consume any messages that should be parsed by `recv`
+
   alias GCloud.SpeechAPI
   alias Google.Cloud.Speech.V1.Speech.Stub, as: SpeechStub
   alias Google.Cloud.Speech.V1.StreamingRecognizeRequest
+
+  require Logger
 
   @timeout 50
 
@@ -32,6 +39,12 @@ defmodule GCloud.SpeechAPI.Streaming.Client.Connection do
   @spec send_request(client :: pid(), StreamingRecognizeRequest.t(), Keyword.t()) :: :ok
   def send_request(pid, request, opts \\ []) do
     send(pid, {__MODULE__, :send_request, request, opts})
+    :ok
+  end
+
+  @spec end_stream(client :: pid()) :: :ok
+  def end_stream(pid) do
+    send(pid, {__MODULE__, :end_stream})
     :ok
   end
 
@@ -76,6 +89,10 @@ defmodule GCloud.SpeechAPI.Streaming.Client.Connection do
         stream |> GRPC.Stub.send_request(request, opts)
         state
 
+      {__MODULE__, :end_stream} ->
+        stream |> GRPC.Stub.end_stream()
+        state
+
       {__MODULE__, :stop} ->
         SpeechAPI.disconnect(channel)
         exit(:normal)
@@ -84,16 +101,21 @@ defmodule GCloud.SpeechAPI.Streaming.Client.Connection do
     end
   end
 
-  defp handle_error(%GRPC.RPCError{status: 4}, state), do: state
+  defp handle_error(%GRPC.RPCError{status: 4, message: "timeout when waiting for server"}, state) do
+    # Error from lib, not the server, indicating the timeout passed before receiving message
+    # which is normal in this case
+    # https://github.com/elixir-grpc/grpc/blob/387eb5df5413fe89d7b62246d6e5b094fd82e0f5/lib/grpc/adapter/gun.ex#L216
+    state
+  end
 
-  # XD
-  defp handle_error(%GRPC.RPCError{message: ":normal", status: 2}, state), do: state
+  defp handle_error(%GRPC.RPCError{message: ":normal", status: 2}, state) do
+    # Seems like an error in GRPC library
+    Logger.debug(":normal error")
+    state
+  end
 
-  defp handle_error(error, _state) do
-    # FIXME use logger
-    IO.inspect(self())
-    IO.inspect(error)
-    # TODO send error to the target?
+  defp handle_error(error, %{target: target}) do
+    Logger.error(inspect(error))
     exit(:error)
   end
 end

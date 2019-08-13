@@ -17,7 +17,7 @@ defmodule GCloud.SpeechAPI do
   end
 
   @doc """
-  returns a list of options that need to be passed to a Service Stub when making a gRPC call
+  Returns a list of options that need to be passed to a Service Stub when making a gRPC call
   """
   def request_opts() do
     [

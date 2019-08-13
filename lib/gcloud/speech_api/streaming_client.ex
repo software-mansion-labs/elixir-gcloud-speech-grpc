@@ -52,7 +52,12 @@ defmodule GCloud.SpeechAPI.Streaming.Client do
   end
 
   defp do_start(fun, options) do
-    options = %{target: self(), start_time: 0} |> Map.merge(options |> Map.new())
+    options =
+      options
+      |> Map.new()
+      |> Map.put_new(:target, self())
+      |> Map.put_new(:start_time, 0)
+
     apply(GenServer, fun, [__MODULE__, options])
   end
 
@@ -72,6 +77,15 @@ defmodule GCloud.SpeechAPI.Streaming.Client do
     :ok
   end
 
+  @doc """
+  Closes a client-side gRPC stream.
+  """
+  @spec end_stream(client :: pid()) :: :ok
+  def end_stream(pid) do
+    GenServer.cast(pid, :end_stream)
+    :ok
+  end
+
   @impl true
   def init(opts) do
     {:ok, conn} = Connection.start_link()
@@ -81,6 +95,12 @@ defmodule GCloud.SpeechAPI.Streaming.Client do
   @impl true
   def handle_cast({:send_request, request, opts}, state) do
     :ok = state.conn |> Connection.send_request(request, opts)
+    {:noreply, state}
+  end
+
+  @impl true
+  def handle_cast(:end_stream, state) do
+    :ok = state.conn |> Connection.end_stream()
     {:noreply, state}
   end
 
