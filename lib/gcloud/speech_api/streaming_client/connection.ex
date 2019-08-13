@@ -114,7 +114,16 @@ defmodule GCloud.SpeechAPI.Streaming.Client.Connection do
     state
   end
 
-  defp handle_error(error, %{target: target}) do
+  defp handle_error(
+         %GRPC.RPCError{message: ":closed: 'The connection was lost.'", status: 2},
+         _state
+       ) do
+    # Seems like yet another error in GRPC library, fixed on master
+    # It means the connection has been closed by server
+    exit(:normal)
+  end
+
+  defp handle_error(error, _state) do
     Logger.error(inspect(error))
     exit(:error)
   end
