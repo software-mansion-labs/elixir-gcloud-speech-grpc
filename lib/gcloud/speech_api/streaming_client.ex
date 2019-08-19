@@ -143,13 +143,16 @@ defmodule GCloud.SpeechAPI.Streaming.Client do
     alternatives |> Enum.map(&update_alternative(&1, start_time))
   end
 
-  defp update_alternative(%SpeechRecognitionAlternative{words: words}, start_time) do
-    words
-    |> Enum.map(fn %WordInfo{} = info ->
-      info
-      |> Map.update!(:start_time, &duration_sum(&1, start_time))
-      |> Map.update!(:end_time, &duration_sum(&1, start_time))
-    end)
+  defp update_alternative(%SpeechRecognitionAlternative{words: words} = alt, start_time) do
+    updated_words =
+      words
+      |> Enum.map(fn %WordInfo{} = info ->
+        info
+        |> Map.update!(:start_time, &duration_sum(&1, start_time))
+        |> Map.update!(:end_time, &duration_sum(&1, start_time))
+      end)
+
+    %{alt | words: updated_words}
   end
 
   defp duration_sum(%Duration{} = a, b) when is_integer(b) do
