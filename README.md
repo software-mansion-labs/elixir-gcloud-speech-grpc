@@ -107,10 +107,6 @@ A recording fragment in `test/fixtures` comes from an audiobook
 
 Current version of library supports only Streaming API, regular and LongRunning are not implemented
 
-## Sponsors
-
-This project is sponsored by [Abridge AI, Inc.](https://abridge.com)
-
 ## Copyright and License
 
 Copyright 2019, [Software Mansion](https://swmansion.com/?utm_source=git&utm_medium=readme&utm_campaign=elixir-gcloud-speech-to-text)
