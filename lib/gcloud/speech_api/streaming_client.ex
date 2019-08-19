@@ -1,8 +1,4 @@
 defmodule GCloud.SpeechAPI.Streaming.Client do
-  use GenServer
-  alias __MODULE__.Connection
-  alias Google.Cloud.Speech.V1.{StreamingRecognizeRequest, StreamingRecognizeResponse}
-
   @moduledoc """
   A client process for Streaming API.
 
@@ -24,17 +20,33 @@ defmodule GCloud.SpeechAPI.Streaming.Client do
   1. Send request(s) with `Google.Cloud.Speech.V1.RecognitionAudio` containing audio data
   1. (async) Receive messages conatining `Google.Cloud.Speech.V1.SpeechRecognitionResult`
   1. Send final `Google.Cloud.Speech.V1.RecognitionAudio` with option `end_stream: true`
+     or call `end_stream/1` after final audio chunk has been sent.
   1. Stop the client after receiving all results
 
   See [README](readme.html) for code example
   """
+
+  use GenServer
+
+  alias __MODULE__.Connection
+
+  alias Google.Cloud.Speech.V1.{
+    StreamingRecognizeRequest,
+    StreamingRecognizeResponse,
+    SpeechRecognitionAlternative,
+    WordInfo
+  }
+
+  alias Google.Protobuf.Duration
+
+  @nanos_per_second 1_000_000_000
 
   @doc """
   Starts a linked client process.
 
   Possible options are:
   - `target` - A pid of a process that will receive recognition results. Defaults to `self()`.
-  - `start_time` - Time by which response times will be shifted. Defaults to `0`.
+  - `start_time` - Time by which response times will be shifted in nanoseconds. Defaults to `0` ns.
   """
   @spec start_link(options :: Keyword.t()) :: {:ok, pid} | {:error, any()}
   def start_link(options \\ []) do
@@ -46,7 +58,7 @@ defmodule GCloud.SpeechAPI.Streaming.Client do
 
   See `start_link/1` for more info
   """
-  @spec start(target :: pid()) :: {:ok, pid} | {:error, any()}
+  @spec start(options :: Keyword.t()) :: {:ok, pid} | {:error, any()}
   def start(options \\ []) do
     do_start(:start, options)
   end
@@ -121,8 +133,26 @@ defmodule GCloud.SpeechAPI.Streaming.Client do
     state.conn |> Connection.stop()
   end
 
-  defp update_result_time(result, start_time) do
+  defp update_result_time(result, start_time) when is_integer(start_time) do
     result
-    |> Map.update!(:result_end_time, &(start_time + &1.nanos + &1.seconds * 1_000_000_000))
+    |> Map.update!(:result_end_time, &duration_sum(&1, start_time))
+    |> Map.update!(:alternatives, &update_alternatives(&1, start_time))
+  end
+
+  defp update_alternatives(alternatives, start_time) do
+    alternatives |> Enum.map(&update_alternative(&1, start_time))
+  end
+
+  defp update_alternative(%SpeechRecognitionAlternative{words: words}, start_time) do
+    words
+    |> Enum.map(fn %WordInfo{} = info ->
+      info
+      |> Map.update!(:start_time, &duration_sum(&1, start_time))
+      |> Map.update!(:end_time, &duration_sum(&1, start_time))
+    end)
+  end
+
+  defp duration_sum(%Duration{} = a, b) when is_integer(b) do
+    b + a.nanos + a.seconds * @nanos_per_second
   end
 end
