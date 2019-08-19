@@ -72,13 +72,7 @@ content_reqs |> Enum.each(fn stream_audio_req ->
   )
 end)
 
-Client.send_request(
-  client,
-  StreamingRecognizeRequest.new(
-    streaming_request: {:audio_content, ""}
-  ),
-  end_stream: true
-)
+Client.end_stream(client)
 
 receive do
   %StreamingRecognizeResponse{results: results} ->
