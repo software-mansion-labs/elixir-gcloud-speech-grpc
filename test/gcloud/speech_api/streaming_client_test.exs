@@ -48,11 +48,7 @@ defmodule GCloud.SpeechAPI.Streaming.ClientTest do
       )
     end)
 
-    @module.send_request(
-      client,
-      StreamingRecognizeRequest.new(streaming_request: {:audio_content, ""}),
-      end_stream: true
-    )
+    @module.end_stream(client)
 
     assert_receive %StreamingRecognizeResponse{results: results}, 5000
     assert [%StreamingRecognitionResult{alternatives: alternative}] = results
