@@ -1,12 +1,12 @@
-defmodule ExGCloudSpeech.MixProject do
+defmodule GCloud.SpeechAPI.MixProject do
   use Mix.Project
 
   @version "0.1.0"
-  @github_url "https://github.com/SoftwareMansion/elixir-gcp-speech"
+  @github_url "https://github.com/SoftwareMansion/elixir-gcloud-speech-grpc"
 
   def project do
     [
-      app: :elixir_gcp_speech,
+      app: :gcloud_speech_grpc,
       version: @version,
       elixir: "~> 1.8",
       start_permanent: Mix.env() == :prod,
@@ -17,7 +17,7 @@ defmodule ExGCloudSpeech.MixProject do
       package: package(),
 
       # docs
-      name: "Elixir GCP Speech",
+      name: "Google Cloud Speech gRPC API",
       source_url: @github_url,
       docs: docs()
     ]
@@ -25,16 +25,17 @@ defmodule ExGCloudSpeech.MixProject do
 
   def application do
     [
-      extra_applications: []
+      extra_applications: [:logger]
     ]
   end
 
   defp deps do
     [
-      {:ex_doc, "~> 0.19", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.21", only: :dev, runtime: false},
       {:goth, "~> 1.0"},
       {:protobuf, "~> 0.6.1"},
-      {:grpc, "~> 0.3.1"}
+      {:grpc, "~> 0.3.1"},
+      {:certifi, "~> 2.5"}
     ]
   end
 
@@ -52,7 +53,22 @@ defmodule ExGCloudSpeech.MixProject do
     [
       main: "readme",
       extras: ["README.md"],
-      source_ref: "v#{@version}"
+      source_ref: "v#{@version}",
+      groups_for_modules: [
+        "Auto-generated": [
+          ~r/Google\.Cloud\.Speech.V1\..*/,
+          ~r/Google\.Longrunning..*/,
+          ~r/Google\.Protobuf\..*/,
+          ~r/Google\.Rpc\..*/
+        ]
+      ],
+      nest_modules_by_prefix: [
+        GCloud.SpeechAPI,
+        Google.Cloud.Speech.V1,
+        Google.Longrunning,
+        Google.Protobuf,
+        Google.Rpc
+      ]
     ]
   end
 end
