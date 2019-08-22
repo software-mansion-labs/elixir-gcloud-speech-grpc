@@ -8,8 +8,8 @@ defmodule GCloud.SpeechAPI.Streaming.Client do
   ## Requests
 
   The requests can be sent using `send_request/3`. Each request should be a
-  `t:#{inspect(StreamingRecognizeRequest)}.t/0` struct created using
-  `#{inspect(StreamingRecognizeRequest)}.new/1` accepting keyword with struct fields.
+  `t:Google.Cloud.Speech.V1.StreamingRecognizeRequest.t/0` struct created using
+  `Google.Cloud.Speech.V1.StreamingRecognizeRequest.new/1` accepting keyword with struct fields.
   This is an auto-generated module, so check out [this notice](readme.html#auto-generated-modules) and
   [API reference](https://cloud.google.com/speech-to-text/docs/reference/rpc/google.cloud.speech.v1#google.cloud.speech.v1.StreamingRecognizeRequest)
 
