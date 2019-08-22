@@ -1,5 +1,8 @@
 # Google Cloud Speech gRPC API client
 
+[![Hex.pm](https://img.shields.io/hexpm/v/gcloud_speech_grpc.svg)](https://hex.pm/packages/gcloud_speech_grpc)
+[![CircleCI](https://circleci.com/gh/SoftwareMansion/elixir-gcloud-speech-grpc.svg?style=svg)](https://circleci.com/gh/SoftwareMansion/elixir-gcloud-speech-grpc)
+
 Elixir client for Google Cloud Speech-to-Text API using gRPC
 
 ## Installation
@@ -105,6 +108,6 @@ Current version of library supports only Streaming API, regular and LongRunning 
 
 Copyright 2019, [Software Mansion](https://swmansion.com/?utm_source=git&utm_medium=readme&utm_campaign=elixir-gcloud-speech-to-text)
 
-[![Software Mansion](https://membraneframework.github.io/static/logo/swm_logo_readme.png)](https://swmansion.com/?utm_source=git&utm_medium=readme&utm_campaign=elixir-gcloud-speech-to-text-gcp-speech)
+[![Software Mansion](https://membraneframework.github.io/static/logo/swm_logo_readme.png)](https://swmansion.com/?utm_source=git&utm_medium=readme&utm_campaign=elixir-gcloud-speech-to-text)
 
 Licensed under the [Apache License, Version 2.0](LICENSE)
