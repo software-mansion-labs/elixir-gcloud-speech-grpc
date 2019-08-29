@@ -46,6 +46,8 @@ defmodule GCloud.SpeechAPI.Streaming.Client do
 
   Possible options are:
   - `target` - A pid of a process that will receive recognition results. Defaults to `self()`.
+  - `monitor_target` - If set to true, a client will monitor the target and shutdown
+  if the target is down
   - `start_time` - Time by which response times will be shifted in nanoseconds. Defaults to `0` ns.
   """
   @spec start_link(options :: Keyword.t()) :: {:ok, pid} | {:error, any()}
@@ -68,6 +70,7 @@ defmodule GCloud.SpeechAPI.Streaming.Client do
       options
       |> Map.new()
       |> Map.put_new(:target, self())
+      |> Map.put_new(:monitor_target, false)
       |> Map.put_new(:start_time, 0)
 
     apply(GenServer, fun, [__MODULE__, options])
@@ -101,7 +104,13 @@ defmodule GCloud.SpeechAPI.Streaming.Client do
   @impl true
   def init(opts) do
     {:ok, conn} = Connection.start_link()
-    {:ok, opts |> Map.merge(%{conn: conn})}
+    state = opts |> Map.merge(%{conn: conn})
+
+    if opts.monitor_target do
+      Process.monitor(opts.target)
+    end
+
+    {:ok, state}
   end
 
   @impl true
@@ -126,6 +135,11 @@ defmodule GCloud.SpeechAPI.Streaming.Client do
 
     send(state.target, response)
     {:noreply, state}
+  end
+
+  @impl true
+  def handle_info({:DOWN, _ref, :process, pid, _reason}, %{target: pid} = state) do
+    {:stop, :normal, state}
   end
 
   @impl true

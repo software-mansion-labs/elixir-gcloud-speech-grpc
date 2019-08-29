@@ -57,4 +57,20 @@ defmodule GCloud.SpeechAPI.Streaming.ClientTest do
     assert transcript ==
              "Adventure 1 a scandal in Bohemia from the Adventures of Sherlock Holmes by Sir Arthur Conan Doyle"
   end
+
+  test "shoutdown on monitored process down" do
+    target = self()
+
+    task =
+      Task.async(fn ->
+        send(target, {:client, @module.start(monitor_target: true)})
+        receive do: (:exit -> :ok)
+      end)
+
+    assert_receive {:client, {:ok, client}}, 2000
+    ref = Process.monitor(client)
+    send(task.pid, :exit)
+    assert :ok = Task.await(task)
+    assert_receive {:DOWN, ^ref, :process, ^client, :normal}
+  end
 end
