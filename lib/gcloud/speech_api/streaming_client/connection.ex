@@ -53,7 +53,7 @@ defmodule GCloud.SpeechAPI.Streaming.Client.Connection do
   def init(channel, target) do
     request_opts = SpeechAPI.request_opts()
     stream = SpeechStub.streaming_recognize(channel, request_opts)
-    loop(%{channel: channel, stream: stream, target: target, recv_enum: nil})
+    loop(%{channel: channel, eos: false, stream: stream, target: target, recv_enum: nil})
   end
 
   defp loop(state) do
@@ -90,8 +90,12 @@ defmodule GCloud.SpeechAPI.Streaming.Client.Connection do
         state
 
       {__MODULE__, :end_stream} ->
-        stream |> GRPC.Stub.end_stream()
-        state
+        if state.eos do
+          state
+        else
+          stream |> GRPC.Stub.end_stream()
+          %{state | eos: true}
+        end
 
       {__MODULE__, :stop} ->
         SpeechAPI.disconnect(channel)
