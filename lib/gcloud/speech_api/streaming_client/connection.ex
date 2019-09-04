@@ -65,7 +65,7 @@ defmodule GCloud.SpeechAPI.Streaming.Client.Connection do
 
   defp grpc_receive(%{stream: stream, recv_enum: nil} = state) do
     # recv reads process mailbox (messages from :gun library)
-    res = GRPC.Stub.recv(stream, timeout: @timeout)
+    res = GRPC.Stub.recv(stream, timeout: 0)
 
     case res do
       {:ok, enum} -> grpc_receive(%{state | recv_enum: enum})
