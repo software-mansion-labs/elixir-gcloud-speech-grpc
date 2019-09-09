@@ -127,8 +127,8 @@ defmodule GCloud.SpeechAPI.Streaming.Client.Connection do
     exit(:normal)
   end
 
-  defp handle_error(error, _state) do
-    Logger.error(inspect(error))
+  defp handle_error(error, state) do
+    Logger.error("[#{inspect(state.target)}]" <> inspect(error))
     exit(:error)
   end
 end
