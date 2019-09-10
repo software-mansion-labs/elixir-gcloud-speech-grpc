@@ -6,6 +6,7 @@ defmodule GCloud.SpeechAPI do
   @doc """
   Connects to a Google Cloud Speech-to-Text API
   """
+  @spec connect() :: {:ok, GRPC.Channel.t()}
   def connect() do
     cred = GRPC.Credential.new(ssl: [cacerts: :certifi.cacerts()])
     gun_opts = %{http2_opts: %{keepalive: :infinity}}
@@ -19,6 +20,7 @@ defmodule GCloud.SpeechAPI do
   @doc """
   Returns a list of options that need to be passed to a Service Stub when making a gRPC call
   """
+  @spec request_opts() :: Keyword.t()
   def request_opts() do
     [
       metadata: authorization_header(),
@@ -36,5 +38,6 @@ defmodule GCloud.SpeechAPI do
   @doc """
   Disconnects from Google Cloud Speech-to-Text API
   """
+  @spec disconnect(GRPC.Channel.t()) :: {:ok, GRPC.Channel.t()} | {:error, any()}
   defdelegate disconnect(channel), to: GRPC.Stub
 end
