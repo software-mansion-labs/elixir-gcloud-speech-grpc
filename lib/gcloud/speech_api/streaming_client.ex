@@ -13,12 +13,17 @@ defmodule GCloud.SpeechAPI.Streaming.Client do
   This is an auto-generated module, so check out [this notice](readme.html#auto-generated-modules) and
   [API reference](https://cloud.google.com/speech-to-text/docs/reference/rpc/google.cloud.speech.v1#google.cloud.speech.v1.StreamingRecognizeRequest)
 
+  ## Responses
+
+  The client sends responses from API via messages to the target (by default it is the process that spawned client).
+  Each message is a struct `t:Google.Cloud.Speech.V1.StreamingRecognizeResponse.t/0` or a tuple with pid of sender and the same struct. Message format is controlled by `include_sender` option of a client.
+
   ## Usage
 
   1. Start the client
   1. Send request with `Google.Cloud.Speech.V1.StreamingRecognitionConfig`
   1. Send request(s) with `Google.Cloud.Speech.V1.RecognitionAudio` containing audio data
-  1. (async) Receive messages conatining `Google.Cloud.Speech.V1.SpeechRecognitionResult`
+  1. (async) Receive messages conatining `Google.Cloud.Speech.V1.StreamingRecognizeResponse`
   1. Send final `Google.Cloud.Speech.V1.RecognitionAudio` with option `end_stream: true`
      or call `end_stream/1` after final audio chunk has been sent.
   1. Stop the client after receiving all results
@@ -41,6 +46,9 @@ defmodule GCloud.SpeechAPI.Streaming.Client do
 
   @nanos_per_second 1_000_000_000
 
+  @typedoc "Format of messages sent by the client to the target"
+  @type message :: StreamingRecognizeResponse.t() | {pid(), StreamingRecognizeResponse.t()}
+
   @doc """
   Starts a linked client process.
 
@@ -48,6 +56,7 @@ defmodule GCloud.SpeechAPI.Streaming.Client do
   - `target` - A pid of a process that will receive recognition results. Defaults to `self()`.
   - `monitor_target` - If set to true, a client will monitor the target and shutdown
   if the target is down
+  - `include_sender` - If true, a client will include its pid in messages sent to the target.
   - `start_time` - Time by which response times will be shifted in nanoseconds. Defaults to `0` ns.
   """
   @spec start_link(options :: Keyword.t()) :: {:ok, pid} | {:error, any()}
@@ -71,6 +80,7 @@ defmodule GCloud.SpeechAPI.Streaming.Client do
       |> Map.new()
       |> Map.put_new(:target, self())
       |> Map.put_new(:monitor_target, false)
+      |> Map.put_new(:include_sender, false)
       |> Map.put_new(:start_time, 0)
 
     apply(GenServer, fun, [__MODULE__, options])
@@ -133,7 +143,12 @@ defmodule GCloud.SpeechAPI.Streaming.Client do
       response
       |> Map.update!(:results, &Enum.map(&1, fn res -> update_result_time(res, start_time) end))
 
-    send(state.target, response)
+    if state.include_sender do
+      send(state.target, {self(), response})
+    else
+      send(state.target, response)
+    end
+
     {:noreply, state}
   end
 
