@@ -36,9 +36,9 @@ defmodule GCloud.SpeechAPI.Streaming.Client.Connection do
     :ok
   end
 
-  @spec send_request(client :: pid(), StreamingRecognizeRequest.t(), Keyword.t()) :: :ok
-  def send_request(pid, request, opts \\ []) do
-    send(pid, {__MODULE__, :send_request, request, opts})
+  @spec send_requests(client :: pid(), [StreamingRecognizeRequest.t()], Keyword.t()) :: :ok
+  def send_requests(pid, requests, opts \\ []) do
+    send(pid, {__MODULE__, :send_requests, requests, opts})
     :ok
   end
 
@@ -85,8 +85,8 @@ defmodule GCloud.SpeechAPI.Streaming.Client.Connection do
 
   defp receive_others(%{channel: channel, stream: stream} = state) do
     receive do
-      {__MODULE__, :send_request, request, opts} ->
-        stream |> GRPC.Stub.send_request(request, opts)
+      {__MODULE__, :send_requests, requests, opts} ->
+        requests |> Enum.each(&GRPC.Stub.send_request(stream, &1, opts))
         state
 
       {__MODULE__, :end_stream} ->

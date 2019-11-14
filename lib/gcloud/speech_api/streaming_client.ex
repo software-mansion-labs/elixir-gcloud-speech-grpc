@@ -98,7 +98,17 @@ defmodule GCloud.SpeechAPI.Streaming.Client do
   """
   @spec send_request(client :: pid(), StreamingRecognizeRequest.t(), Keyword.t()) :: :ok
   def send_request(pid, request, opts \\ []) do
-    GenServer.cast(pid, {:send_request, request, opts})
+    GenServer.cast(pid, {:send_requests, [request], opts})
+    :ok
+  end
+
+  @doc """
+  Sends a list of requests to the API. If option `end_stream: true` is passed,
+  closes a client-side gRPC stream.
+  """
+  @spec send_requests(client :: pid(), [StreamingRecognizeRequest.t()], Keyword.t()) :: :ok
+  def send_requests(pid, request, opts \\ []) do
+    GenServer.cast(pid, {:send_requests, request, opts})
     :ok
   end
 
@@ -124,8 +134,8 @@ defmodule GCloud.SpeechAPI.Streaming.Client do
   end
 
   @impl true
-  def handle_cast({:send_request, request, opts}, state) do
-    :ok = state.conn |> Connection.send_request(request, opts)
+  def handle_cast({:send_requests, requests, opts}, state) do
+    :ok = state.conn |> Connection.send_requests(requests, opts)
     {:noreply, state}
   end
 
