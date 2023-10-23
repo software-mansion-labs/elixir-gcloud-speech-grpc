@@ -2,10 +2,6 @@ defmodule Google.Cloud.Speech.V1.RecognizeRequest do
   @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          config: Google.Cloud.Speech.V1.RecognitionConfig.t() | nil,
-          audio: Google.Cloud.Speech.V1.RecognitionAudio.t() | nil
-        }
   defstruct [:config, :audio]
 
   field :config, 1, type: Google.Cloud.Speech.V1.RecognitionConfig
@@ -16,10 +12,6 @@ defmodule Google.Cloud.Speech.V1.LongRunningRecognizeRequest do
   @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          config: Google.Cloud.Speech.V1.RecognitionConfig.t() | nil,
-          audio: Google.Cloud.Speech.V1.RecognitionAudio.t() | nil
-        }
   defstruct [:config, :audio]
 
   field :config, 1, type: Google.Cloud.Speech.V1.RecognitionConfig
@@ -30,9 +22,6 @@ defmodule Google.Cloud.Speech.V1.StreamingRecognizeRequest do
   @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          streaming_request: {atom, any}
-        }
   defstruct [:streaming_request]
 
   oneof :streaming_request, 0
@@ -44,11 +33,6 @@ defmodule Google.Cloud.Speech.V1.StreamingRecognitionConfig do
   @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          config: Google.Cloud.Speech.V1.RecognitionConfig.t() | nil,
-          single_utterance: boolean,
-          interim_results: boolean
-        }
   defstruct [:config, :single_utterance, :interim_results]
 
   field :config, 1, type: Google.Cloud.Speech.V1.RecognitionConfig
@@ -60,21 +44,6 @@ defmodule Google.Cloud.Speech.V1.RecognitionConfig do
   @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          encoding: atom | integer,
-          sample_rate_hertz: integer,
-          audio_channel_count: integer,
-          enable_separate_recognition_per_channel: boolean,
-          language_code: String.t(),
-          max_alternatives: integer,
-          profanity_filter: boolean,
-          speech_contexts: [Google.Cloud.Speech.V1.SpeechContext.t()],
-          enable_word_time_offsets: boolean,
-          enable_automatic_punctuation: boolean,
-          metadata: Google.Cloud.Speech.V1.RecognitionMetadata.t() | nil,
-          model: String.t(),
-          use_enhanced: boolean
-        }
   defstruct [
     :encoding,
     :sample_rate_hertz,
@@ -124,16 +93,6 @@ defmodule Google.Cloud.Speech.V1.RecognitionMetadata do
   @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          interaction_type: atom | integer,
-          industry_naics_code_of_audio: non_neg_integer,
-          microphone_distance: atom | integer,
-          original_media_type: atom | integer,
-          recording_device_type: atom | integer,
-          recording_device_name: String.t(),
-          original_mime_type: String.t(),
-          audio_topic: String.t()
-        }
   defstruct [
     :interaction_type,
     :industry_naics_code_of_audio,
@@ -219,9 +178,6 @@ defmodule Google.Cloud.Speech.V1.SpeechContext do
   @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          phrases: [String.t()]
-        }
   defstruct [:phrases]
 
   field :phrases, 1, repeated: true, type: :string
@@ -231,9 +187,6 @@ defmodule Google.Cloud.Speech.V1.RecognitionAudio do
   @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          audio_source: {atom, any}
-        }
   defstruct [:audio_source]
 
   oneof :audio_source, 0
@@ -245,9 +198,6 @@ defmodule Google.Cloud.Speech.V1.RecognizeResponse do
   @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          results: [Google.Cloud.Speech.V1.SpeechRecognitionResult.t()]
-        }
   defstruct [:results]
 
   field :results, 2, repeated: true, type: Google.Cloud.Speech.V1.SpeechRecognitionResult
@@ -257,9 +207,6 @@ defmodule Google.Cloud.Speech.V1.LongRunningRecognizeResponse do
   @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          results: [Google.Cloud.Speech.V1.SpeechRecognitionResult.t()]
-        }
   defstruct [:results]
 
   field :results, 2, repeated: true, type: Google.Cloud.Speech.V1.SpeechRecognitionResult
@@ -269,11 +216,6 @@ defmodule Google.Cloud.Speech.V1.LongRunningRecognizeMetadata do
   @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          progress_percent: integer,
-          start_time: Google.Protobuf.Timestamp.t() | nil,
-          last_update_time: Google.Protobuf.Timestamp.t() | nil
-        }
   defstruct [:progress_percent, :start_time, :last_update_time]
 
   field :progress_percent, 1, type: :int32
@@ -285,11 +227,6 @@ defmodule Google.Cloud.Speech.V1.StreamingRecognizeResponse do
   @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          error: Google.Rpc.Status.t() | nil,
-          results: [Google.Cloud.Speech.V1.StreamingRecognitionResult.t()],
-          speech_event_type: atom | integer
-        }
   defstruct [:error, :results, :speech_event_type]
 
   field :error, 1, type: Google.Rpc.Status
@@ -312,14 +249,6 @@ defmodule Google.Cloud.Speech.V1.StreamingRecognitionResult do
   @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          alternatives: [Google.Cloud.Speech.V1.SpeechRecognitionAlternative.t()],
-          is_final: boolean,
-          stability: float,
-          result_end_time: Google.Protobuf.Duration.t() | nil,
-          channel_tag: integer,
-          language_code: String.t()
-        }
   defstruct [:alternatives, :is_final, :stability, :result_end_time, :channel_tag, :language_code]
 
   field :alternatives, 1,
@@ -337,10 +266,6 @@ defmodule Google.Cloud.Speech.V1.SpeechRecognitionResult do
   @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          alternatives: [Google.Cloud.Speech.V1.SpeechRecognitionAlternative.t()],
-          channel_tag: integer
-        }
   defstruct [:alternatives, :channel_tag]
 
   field :alternatives, 1,
@@ -354,11 +279,6 @@ defmodule Google.Cloud.Speech.V1.SpeechRecognitionAlternative do
   @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          transcript: String.t(),
-          confidence: float,
-          words: [Google.Cloud.Speech.V1.WordInfo.t()]
-        }
   defstruct [:transcript, :confidence, :words]
 
   field :transcript, 1, type: :string
@@ -370,11 +290,6 @@ defmodule Google.Cloud.Speech.V1.WordInfo do
   @moduledoc "Auto-generated from `googleapis/google/cloud/speech/v1/cloud_speech.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          start_time: Google.Protobuf.Duration.t() | nil,
-          end_time: Google.Protobuf.Duration.t() | nil,
-          word: String.t()
-        }
   defstruct [:start_time, :end_time, :word]
 
   field :start_time, 1, type: Google.Protobuf.Duration

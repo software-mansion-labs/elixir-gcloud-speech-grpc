@@ -2,11 +2,6 @@ defmodule Google.Rpc.Status do
   @moduledoc "Auto-generated from `googleapis/google/rpc/status.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          code: integer,
-          message: String.t(),
-          details: [Google.Protobuf.Any.t()]
-        }
   defstruct [:code, :message, :details]
 
   field :code, 1, type: :int32

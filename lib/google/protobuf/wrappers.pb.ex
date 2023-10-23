@@ -2,9 +2,6 @@ defmodule Google.Protobuf.DoubleValue do
   @moduledoc "Auto-generated from `googleapis/google/protobuf/wrappers.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          value: float
-        }
   defstruct [:value]
 
   field :value, 1, type: :double
@@ -14,9 +11,6 @@ defmodule Google.Protobuf.FloatValue do
   @moduledoc "Auto-generated from `googleapis/google/protobuf/wrappers.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          value: float
-        }
   defstruct [:value]
 
   field :value, 1, type: :float
@@ -26,9 +20,6 @@ defmodule Google.Protobuf.Int64Value do
   @moduledoc "Auto-generated from `googleapis/google/protobuf/wrappers.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          value: integer
-        }
   defstruct [:value]
 
   field :value, 1, type: :int64
@@ -38,9 +29,6 @@ defmodule Google.Protobuf.UInt64Value do
   @moduledoc "Auto-generated from `googleapis/google/protobuf/wrappers.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          value: non_neg_integer
-        }
   defstruct [:value]
 
   field :value, 1, type: :uint64
@@ -50,9 +38,6 @@ defmodule Google.Protobuf.Int32Value do
   @moduledoc "Auto-generated from `googleapis/google/protobuf/wrappers.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          value: integer
-        }
   defstruct [:value]
 
   field :value, 1, type: :int32
@@ -62,9 +47,6 @@ defmodule Google.Protobuf.UInt32Value do
   @moduledoc "Auto-generated from `googleapis/google/protobuf/wrappers.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          value: non_neg_integer
-        }
   defstruct [:value]
 
   field :value, 1, type: :uint32
@@ -74,9 +56,6 @@ defmodule Google.Protobuf.BoolValue do
   @moduledoc "Auto-generated from `googleapis/google/protobuf/wrappers.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          value: boolean
-        }
   defstruct [:value]
 
   field :value, 1, type: :bool
@@ -86,9 +65,6 @@ defmodule Google.Protobuf.StringValue do
   @moduledoc "Auto-generated from `googleapis/google/protobuf/wrappers.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          value: String.t()
-        }
   defstruct [:value]
 
   field :value, 1, type: :string
@@ -98,9 +74,6 @@ defmodule Google.Protobuf.BytesValue do
   @moduledoc "Auto-generated from `googleapis/google/protobuf/wrappers.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          value: binary
-        }
   defstruct [:value]
 
   field :value, 1, type: :bytes

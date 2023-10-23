@@ -2,12 +2,6 @@ defmodule Google.Longrunning.Operation do
   @moduledoc "Auto-generated from `googleapis/google/longrunning/operations.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          result: {atom, any},
-          name: String.t(),
-          metadata: Google.Protobuf.Any.t() | nil,
-          done: boolean
-        }
   defstruct [:result, :name, :metadata, :done]
 
   oneof :result, 0
@@ -22,9 +16,6 @@ defmodule Google.Longrunning.GetOperationRequest do
   @moduledoc "Auto-generated from `googleapis/google/longrunning/operations.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          name: String.t()
-        }
   defstruct [:name]
 
   field :name, 1, type: :string
@@ -34,12 +25,6 @@ defmodule Google.Longrunning.ListOperationsRequest do
   @moduledoc "Auto-generated from `googleapis/google/longrunning/operations.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          name: String.t(),
-          filter: String.t(),
-          page_size: integer,
-          page_token: String.t()
-        }
   defstruct [:name, :filter, :page_size, :page_token]
 
   field :name, 4, type: :string
@@ -52,10 +37,6 @@ defmodule Google.Longrunning.ListOperationsResponse do
   @moduledoc "Auto-generated from `googleapis/google/longrunning/operations.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          operations: [Google.Longrunning.Operation.t()],
-          next_page_token: String.t()
-        }
   defstruct [:operations, :next_page_token]
 
   field :operations, 1, repeated: true, type: Google.Longrunning.Operation
@@ -66,9 +47,6 @@ defmodule Google.Longrunning.CancelOperationRequest do
   @moduledoc "Auto-generated from `googleapis/google/longrunning/operations.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          name: String.t()
-        }
   defstruct [:name]
 
   field :name, 1, type: :string
@@ -78,9 +56,6 @@ defmodule Google.Longrunning.DeleteOperationRequest do
   @moduledoc "Auto-generated from `googleapis/google/longrunning/operations.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          name: String.t()
-        }
   defstruct [:name]
 
   field :name, 1, type: :string
@@ -90,10 +65,6 @@ defmodule Google.Longrunning.WaitOperationRequest do
   @moduledoc "Auto-generated from `googleapis/google/longrunning/operations.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          name: String.t(),
-          timeout: Google.Protobuf.Duration.t() | nil
-        }
   defstruct [:name, :timeout]
 
   field :name, 1, type: :string
@@ -104,10 +75,6 @@ defmodule Google.Longrunning.OperationInfo do
   @moduledoc "Auto-generated from `googleapis/google/longrunning/operations.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          response_type: String.t(),
-          metadata_type: String.t()
-        }
   defstruct [:response_type, :metadata_type]
 
   field :response_type, 1, type: :string

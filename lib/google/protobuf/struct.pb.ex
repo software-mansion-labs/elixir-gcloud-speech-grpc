@@ -2,9 +2,6 @@ defmodule Google.Protobuf.Struct do
   @moduledoc "Auto-generated from `googleapis/google/protobuf/struct.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          fields: %{String.t() => Google.Protobuf.Value.t() | nil}
-        }
   defstruct [:fields]
 
   field :fields, 1, repeated: true, type: Google.Protobuf.Struct.FieldsEntry, map: true
@@ -14,10 +11,6 @@ defmodule Google.Protobuf.Struct.FieldsEntry do
   @moduledoc "Auto-generated from `googleapis/google/protobuf/struct.proto`"
   use Protobuf, map: true, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          key: String.t(),
-          value: Google.Protobuf.Value.t() | nil
-        }
   defstruct [:key, :value]
 
   field :key, 1, type: :string
@@ -28,9 +21,6 @@ defmodule Google.Protobuf.Value do
   @moduledoc "Auto-generated from `googleapis/google/protobuf/struct.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          kind: {atom, any}
-        }
   defstruct [:kind]
 
   oneof :kind, 0
@@ -46,9 +36,6 @@ defmodule Google.Protobuf.ListValue do
   @moduledoc "Auto-generated from `googleapis/google/protobuf/struct.proto`"
   use Protobuf, syntax: :proto3
 
-  @type t :: %__MODULE__{
-          values: [Google.Protobuf.Value.t()]
-        }
   defstruct [:values]
 
   field :values, 1, repeated: true, type: Google.Protobuf.Value
