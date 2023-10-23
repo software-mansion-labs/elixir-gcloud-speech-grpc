@@ -7,7 +7,7 @@ end
 
 defmodule Google.Protobuf.Struct.FieldsEntry do
   @moduledoc "Auto-generated from `googleapis/google/protobuf/struct.proto`"
-  use Protobuf, map: true, syntax: :proto3
+  use Protobuf, syntax: :proto3
 
   field :key, 1, type: :string
   field :value, 2, type: Google.Protobuf.Value
