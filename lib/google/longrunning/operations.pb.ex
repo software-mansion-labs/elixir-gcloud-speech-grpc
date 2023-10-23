@@ -2,8 +2,6 @@ defmodule Google.Longrunning.Operation do
   @moduledoc "Auto-generated from `googleapis/google/longrunning/operations.proto`"
   use Protobuf, syntax: :proto3
 
-  defstruct [:result, :name, :metadata, :done]
-
   oneof :result, 0
   field :name, 1, type: :string
   field :metadata, 2, type: Google.Protobuf.Any
@@ -16,16 +14,12 @@ defmodule Google.Longrunning.GetOperationRequest do
   @moduledoc "Auto-generated from `googleapis/google/longrunning/operations.proto`"
   use Protobuf, syntax: :proto3
 
-  defstruct [:name]
-
   field :name, 1, type: :string
 end
 
 defmodule Google.Longrunning.ListOperationsRequest do
   @moduledoc "Auto-generated from `googleapis/google/longrunning/operations.proto`"
   use Protobuf, syntax: :proto3
-
-  defstruct [:name, :filter, :page_size, :page_token]
 
   field :name, 4, type: :string
   field :filter, 1, type: :string
@@ -37,8 +31,6 @@ defmodule Google.Longrunning.ListOperationsResponse do
   @moduledoc "Auto-generated from `googleapis/google/longrunning/operations.proto`"
   use Protobuf, syntax: :proto3
 
-  defstruct [:operations, :next_page_token]
-
   field :operations, 1, repeated: true, type: Google.Longrunning.Operation
   field :next_page_token, 2, type: :string
 end
@@ -47,16 +39,12 @@ defmodule Google.Longrunning.CancelOperationRequest do
   @moduledoc "Auto-generated from `googleapis/google/longrunning/operations.proto`"
   use Protobuf, syntax: :proto3
 
-  defstruct [:name]
-
   field :name, 1, type: :string
 end
 
 defmodule Google.Longrunning.DeleteOperationRequest do
   @moduledoc "Auto-generated from `googleapis/google/longrunning/operations.proto`"
   use Protobuf, syntax: :proto3
-
-  defstruct [:name]
 
   field :name, 1, type: :string
 end
@@ -65,8 +53,6 @@ defmodule Google.Longrunning.WaitOperationRequest do
   @moduledoc "Auto-generated from `googleapis/google/longrunning/operations.proto`"
   use Protobuf, syntax: :proto3
 
-  defstruct [:name, :timeout]
-
   field :name, 1, type: :string
   field :timeout, 2, type: Google.Protobuf.Duration
 end
@@ -74,8 +60,6 @@ end
 defmodule Google.Longrunning.OperationInfo do
   @moduledoc "Auto-generated from `googleapis/google/longrunning/operations.proto`"
   use Protobuf, syntax: :proto3
-
-  defstruct [:response_type, :metadata_type]
 
   field :response_type, 1, type: :string
   field :metadata_type, 2, type: :string

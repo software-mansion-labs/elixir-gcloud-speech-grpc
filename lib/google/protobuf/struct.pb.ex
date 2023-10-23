@@ -2,16 +2,12 @@ defmodule Google.Protobuf.Struct do
   @moduledoc "Auto-generated from `googleapis/google/protobuf/struct.proto`"
   use Protobuf, syntax: :proto3
 
-  defstruct [:fields]
-
   field :fields, 1, repeated: true, type: Google.Protobuf.Struct.FieldsEntry, map: true
 end
 
 defmodule Google.Protobuf.Struct.FieldsEntry do
   @moduledoc "Auto-generated from `googleapis/google/protobuf/struct.proto`"
   use Protobuf, map: true, syntax: :proto3
-
-  defstruct [:key, :value]
 
   field :key, 1, type: :string
   field :value, 2, type: Google.Protobuf.Value
@@ -20,8 +16,6 @@ end
 defmodule Google.Protobuf.Value do
   @moduledoc "Auto-generated from `googleapis/google/protobuf/struct.proto`"
   use Protobuf, syntax: :proto3
-
-  defstruct [:kind]
 
   oneof :kind, 0
   field :null_value, 1, type: Google.Protobuf.NullValue, enum: true, oneof: 0
@@ -35,8 +29,6 @@ end
 defmodule Google.Protobuf.ListValue do
   @moduledoc "Auto-generated from `googleapis/google/protobuf/struct.proto`"
   use Protobuf, syntax: :proto3
-
-  defstruct [:values]
 
   field :values, 1, repeated: true, type: Google.Protobuf.Value
 end
