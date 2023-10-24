@@ -1,7 +1,7 @@
 defmodule GCloud.SpeechAPI.MixProject do
   use Mix.Project
 
-  @version "0.4.0"
+  @version "0.5.0"
   @github_url "https://github.com/SoftwareMansion/elixir-gcloud-speech-grpc"
 
   def project do
