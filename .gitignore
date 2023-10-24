@@ -1,4 +1,5 @@
 config/*creds.json
+googleapis
 
 # Created by https://www.gitignore.io/api/vim,linux,macos,elixir,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=vim,linux,macos,elixir,visualstudiocode
