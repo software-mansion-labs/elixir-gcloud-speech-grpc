@@ -392,3 +392,25 @@ defmodule Google.Cloud.Speech.V1.SpeechAdaptationInfo do
   field :adaptation_timeout, 1, type: :bool, json_name: "adaptationTimeout"
   field :timeout_message, 4, type: :string, json_name: "timeoutMessage"
 end
+
+defmodule Google.Cloud.Speech.V1.Speech.Service do
+  @moduledoc false
+  use GRPC.Service, name: "google.cloud.speech.v1.Speech"
+
+  rpc :Recognize,
+      Google.Cloud.Speech.V1.RecognizeRequest,
+      Google.Cloud.Speech.V1.RecognizeResponse
+
+  rpc :LongRunningRecognize,
+      Google.Cloud.Speech.V1.LongRunningRecognizeRequest,
+      Google.Longrunning.Operation
+
+  rpc :StreamingRecognize,
+      stream(Google.Cloud.Speech.V1.StreamingRecognizeRequest),
+      stream(Google.Cloud.Speech.V1.StreamingRecognizeResponse)
+end
+
+defmodule Google.Cloud.Speech.V1.Speech.Stub do
+  @moduledoc false
+  use GRPC.Stub, service: Google.Cloud.Speech.V1.Speech.Service
+end
