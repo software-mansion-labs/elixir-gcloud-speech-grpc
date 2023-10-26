@@ -8,7 +8,7 @@ defmodule GCloud.SpeechAPI do
   """
   @spec connect() :: {:ok, GRPC.Channel.t()}
   def connect() do
-    cred = GRPC.Credential.new(ssl: [cacerts: :certifi.cacerts()])
+    cred = GRPC.Credential.new(ssl: [cacerts: :certifi.cacerts(), verify: :verify_none])
     gun_opts = %{http2_opts: %{keepalive: :infinity}}
 
     with {:ok, channel} <-
