@@ -1,13 +1,8 @@
 defmodule Google.Protobuf.Any do
-  @moduledoc "Auto-generated from `googleapis/google/protobuf/any.proto`"
-  use Protobuf, syntax: :proto3
+  @moduledoc false
 
-  @type t :: %__MODULE__{
-          type_url: String.t(),
-          value: binary
-        }
-  defstruct [:type_url, :value]
+  use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
 
-  field :type_url, 1, type: :string
+  field :type_url, 1, type: :string, json_name: "typeUrl"
   field :value, 2, type: :bytes
 end

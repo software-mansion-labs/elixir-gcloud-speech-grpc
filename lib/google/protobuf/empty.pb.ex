@@ -1,7 +1,5 @@
 defmodule Google.Protobuf.Empty do
-  @moduledoc "Auto-generated from `googleapis/google/protobuf/empty.proto`"
-  use Protobuf, syntax: :proto3
+  @moduledoc false
 
-  @type t :: %__MODULE__{}
-  defstruct []
+  use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
 end
